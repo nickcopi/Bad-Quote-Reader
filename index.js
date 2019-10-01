@@ -16,9 +16,11 @@ let display = ()=>{
 	console.log(entries[place]);
 }
 
-const entries = [];
+let entries = [];
 let place = 0;
 let init = async ()=>{
+	entries = [];
+	place = 0;
 	const $ = cheerio.load(await getPage());
 	$('.qt').each(function(i,e){
 		entries.push($(this).text());
@@ -55,6 +57,9 @@ process.stdin.on('keypress',(str,key)=>{
 		 }
 		 if(str === 's'){
 			 saveFile();
+		 }
+		 if(str === 'r'){
+			 init();
 		 }
 	 }
 	
